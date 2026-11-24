@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,6 +23,14 @@ class SpringTestSampleSimpleApplicationTests {
 
 	@Autowired
 	ApplicationContext ctx;
+
+	@Autowired
+	Environment environment;
+
+	@Test
+	void smokeRequirementPropertyIsLoaded() {
+		assertThat(this.environment.getProperty("smoke.requirement")).isEqualTo("SMOKE-1");
+	}
 
 	@Test
 	void testContextLoads() {
